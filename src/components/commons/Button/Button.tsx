@@ -1,12 +1,13 @@
 import { Button as MuiButton } from "@mui/material"
 
 type PropTypes = {
-    children: string
+    children: string,
+    onClick?: () => void
 }
 
-export const Button = ({children}: PropTypes) => {
+export const Button = ({children, onClick}: PropTypes) => {
     return (
-        <MuiButton variant="contained" color="primary">
+        <MuiButton variant="contained" color="primary" onClick={onClick}>
             {children}
         </MuiButton>
     )

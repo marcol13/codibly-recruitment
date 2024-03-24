@@ -5,7 +5,8 @@ const appDefaultState: AppReducerState = {
     error: null,
     loading: false,
     totalPages: 0,
-    page: 0
+    page: 0,
+    total: 0
 }
 
 export function appReducer(state = appDefaultState, action: any) {
@@ -13,7 +14,11 @@ export function appReducer(state = appDefaultState, action: any) {
         case 'api/load':
             return { ...state, loading: true}
         case 'api/fetch':
-            return { ...state, data: action.payload.data, error: null, loading: false, totalPages: action.payload.totalPages, page: action.payload.page }
+            const data = Array.isArray(action.payload.data) ? action.payload.data : [action.payload.data]
+            const totalPages = action.payload.totalPages ?? 1
+            const page = action.payload.page ?? 1
+            const total = action.payload.total ?? data.length
+            return { ...state, data: data, error: null, loading: false, totalPages: totalPages, page: page, total: total}
         case 'api/error':
             return { ...state, data: [], error: action.payload.error, loading: false, totalPages: 0, page: 0 }
         default:

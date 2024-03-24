@@ -19,6 +19,7 @@ export interface AppReducerState {
     loading: boolean;
     totalPages: number;
     page: number;
+    total: number;
 }
 
 export interface ModalReducerState {
