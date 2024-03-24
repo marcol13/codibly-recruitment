@@ -10,6 +10,7 @@ import { fetchData } from "../store/actions"
 import { ReducerState } from "../interfaces/api"
 import { useAppDispatch } from "../store/store"
 import { ITEMS_PER_PAGE } from "../utils/constants"
+import { getQueryParams, updateUrl } from "../utils/services"
 
 const FilterContainer = styled.div`
     display: flex;
@@ -37,9 +38,15 @@ export default function Main() {
     const inputRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
-        dispatch(fetchData())
+        const urlParams = getQueryParams()
+        if(urlParams?.page) {
+            const pageNo = parseInt(urlParams.page as string) + 1
+            console.log(pageNo)
+            paginationRef.current?.querySelectorAll("button")[pageNo].click()
+        }
+        dispatch(fetchData(urlParams))
         // fetch(`${API_URL}?per_page=5`).then(response => response.json()).then(data => console.log(data))
-    }, [dispatch])
+    }, [])
 
     return (
         <Container maxWidth="sm" sx={{marginTop: "4rem"}}>
@@ -48,15 +55,16 @@ export default function Main() {
                 <div>
 
                 <Button onClick={() => {
+                    updateUrl({id: inputRef.current?.value})
                     dispatch(fetchData({id: inputRef.current?.value}))
                     }}>
                     Find
                 </Button>
                 <Button onClick={() => {
+                    updateUrl({})
                     if(inputRef.current?.value){
                         inputRef.current.value = ""
                     }
-                    paginationRef.current?.querySelectorAll("button")[1]?.click()
                     dispatch(fetchData())}}>
                     Reset
                 </Button>
@@ -69,7 +77,9 @@ export default function Main() {
 
         <NavigationContainer>
             {
-                appSelector.total > ITEMS_PER_PAGE && <Pagination ref={paginationRef} count={appSelector.totalPages} color="primary" onChange={(_, page) => dispatch(fetchData({page: page}))} />
+                appSelector.total > ITEMS_PER_PAGE && <Pagination ref={paginationRef} page={appSelector.page} count={appSelector.totalPages} color="primary" onChange={(_, page) => {
+                    updateUrl({page: page})
+                    dispatch(fetchData({page: page}))}} />
 
             }
         

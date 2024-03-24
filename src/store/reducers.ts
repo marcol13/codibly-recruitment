@@ -6,7 +6,7 @@ const appDefaultState: AppReducerState = {
     loading: false,
     totalPages: 0,
     page: 0,
-    total: 0
+    total: 0,
 }
 
 export function appReducer(state = appDefaultState, action: any) {
