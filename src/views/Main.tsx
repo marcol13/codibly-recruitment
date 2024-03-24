@@ -58,7 +58,7 @@ export default function Main() {
         <DataDialog open={modalSelector.open} data={modalSelector.data} />
 
         <NavigationContainer>
-        <Pagination count={appSelector.totalPages} color="primary" />
+        <Pagination count={appSelector.totalPages} color="primary" onChange={(_, page) => dispatch(fetchData(page))} />
 
         </NavigationContainer>
         </Container>
