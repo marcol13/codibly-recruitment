@@ -30,8 +30,8 @@ const NavigationContainer = styled.div`
 
 export default function Main() {
     const dispatch = useAppDispatch()
-    const data = useSelector((state: ReducerState) => state.app.data)
-    const error = useSelector((state: ReducerState) => state.app.error)
+    const appSelector = useSelector((state: ReducerState) => state.app)
+    const modalSelector = useSelector((state: ReducerState) => state.modal)
 
     useEffect(() => {
         dispatch(fetchData())
@@ -53,18 +53,12 @@ export default function Main() {
                 </div>
 
             </FilterContainer>
-            <DataTable data={data} />
+            <DataTable data={appSelector.data} />
 
-        <DataDialog data={{
-"id": 6,
-"name": "blue turquoise",
-"year": 2005,
-"color": "#53B0AE",
-"pantone_value": "15-5217"
-        }} />
+        <DataDialog open={modalSelector.open} data={modalSelector.data} />
 
         <NavigationContainer>
-        <Pagination count={10} color="primary" />
+        <Pagination count={appSelector.totalPages} color="primary" />
 
         </NavigationContainer>
         </Container>

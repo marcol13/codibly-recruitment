@@ -4,9 +4,10 @@ import {Table, TableBody, TableCell, TableRow, IconButton, Typography} from "@mu
 import CloseIcon from "@mui/icons-material/Close";
 import styled from "styled-components";
 import { useState } from "react";
+import { useAppDispatch } from "../../../store/store";
 
 type PropTypes = {
-    data: Color;
+    data: Color | null;
     open?: boolean;
 }
 
@@ -37,9 +38,8 @@ const ColorSample = styled.div`
     border-radius: 25%;
 `
 
-export const DataDialog = ({data}: PropTypes) => {
-    const [open, setOpen] = useState(false);
-
+export const DataDialog = ({data, open=false}: PropTypes) => {
+    const dispatch = useAppDispatch()
 
     const tableProperties: DetailTableProperties[] = [
         {label: "ID", key: "id"},
@@ -49,8 +49,10 @@ export const DataDialog = ({data}: PropTypes) => {
     ]
 
     const handleClose = () => {
-        setOpen(false);
+        dispatch({type: "modal/close"})
     }
+
+    if(!data) return null
 
     return (
         <Dialog open={open} sx={{minWidth: "500px", minHeight: "500px"}}>

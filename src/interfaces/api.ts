@@ -17,6 +17,8 @@ export interface AppReducerState {
     data: Color[];
     error: string | null;
     loading: boolean;
+    totalPages: number;
+    page: number;
 }
 
 export interface ModalReducerState {
