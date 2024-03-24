@@ -1,4 +1,6 @@
-const appDefaultState: any = {
+import { AppReducerState, ModalReducerState } from "../interfaces/api"
+
+const appDefaultState: AppReducerState = {
     data: [],
     error: null,
     loading: false,
@@ -17,7 +19,7 @@ export function appReducer(state = appDefaultState, action: any) {
     }
 }
 
-const modalDefaultState: any = {
+const modalDefaultState: ModalReducerState = {
     open: false,
     data: null
 }

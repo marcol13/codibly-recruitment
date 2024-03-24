@@ -12,3 +12,19 @@ export interface DetailTableProperties {
     label: string;
     key: keyof Color;
 }
+
+export interface AppReducerState {
+    data: Color[];
+    error: string | null;
+    loading: boolean;
+}
+
+export interface ModalReducerState {
+    open: boolean;
+    data: Color | null;
+}
+
+export interface ReducerState {
+    app: AppReducerState;
+    modal: ModalReducerState;
+}

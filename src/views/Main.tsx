@@ -5,9 +5,10 @@ import { DataTable } from "../components/commons/DataTable/DataTable"
 import { DataDialog } from "../components/commons/DataDialog/DataDialog"
 import styled from "styled-components"
 import { useEffect } from "react"
-import { API_URL } from "../utils/constants"
-import { useDispatch, useSelector } from "react-redux"
+import { useSelector } from "react-redux"
 import { fetchData } from "../store/actions"
+import { ReducerState } from "../interfaces/api"
+import { useAppDispatch } from "../store/store"
 
 const FilterContainer = styled.div`
     display: flex;
@@ -28,9 +29,9 @@ const NavigationContainer = styled.div`
 `
 
 export default function Main() {
-    const dispatch = useDispatch()
-    const data = useSelector(state => state.app.data)
-    const error = useSelector(state => state.app.error)
+    const dispatch = useAppDispatch()
+    const data = useSelector((state: ReducerState) => state.app.data)
+    const error = useSelector((state: ReducerState) => state.app.error)
 
     useEffect(() => {
         dispatch(fetchData())
