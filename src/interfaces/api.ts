@@ -14,7 +14,7 @@ export interface DetailTableProperties {
 }
 
 export interface AppReducerState {
-    data: Color[];
+    data: Color[] | [];
     error: string | null;
     loading: boolean;
     totalPages: number;
@@ -31,3 +31,5 @@ export interface ReducerState {
     app: AppReducerState;
     modal: ModalReducerState;
 }
+
+export type ApiResponseTypes = string | number | null | undefined | boolean | Color[]

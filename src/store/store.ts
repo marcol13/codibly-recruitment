@@ -1,13 +1,13 @@
-import { Middleware, applyMiddleware, configureStore } from "@reduxjs/toolkit";
-import {appReducer, modalReducer} from "./reducers";
 import { useDispatch } from "react-redux";
+import { configureStore } from "@reduxjs/toolkit";
+import { appReducer, modalReducer } from "./reducers";
 
 const store = configureStore({
-    reducer: {
-        app: appReducer,
-        modal: modalReducer
-    }
-})
+	reducer: {
+		app: appReducer,
+		modal: modalReducer,
+	},
+});
 
 export type AppDispatch = typeof store.dispatch;
 export const useAppDispatch = () => useDispatch<AppDispatch>();
