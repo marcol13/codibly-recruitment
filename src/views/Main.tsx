@@ -4,7 +4,7 @@ import { Button } from "../components/commons/Button/Button";
 import { Container, Pagination } from "@mui/material";
 import { DataTable } from "../components/data/DataTable/DataTable";
 import { DataDialog } from "../components/data/DataDialog/DataDialog";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, ChangeEvent } from "react";
 import { useSelector } from "react-redux";
 import { fetchData } from "../store/actions";
 import { ReducerState } from "../interfaces/api";
@@ -93,7 +93,7 @@ export default function Main() {
 						page={appSelector.page}
 						count={appSelector.totalPages}
 						color="primary"
-						onChange={(_: Event, page: number) => {
+						onChange={(_: ChangeEvent<unknown>, page: number) => {
 							updateUrl({ page: page });
 							dispatch(fetchData({ page: page }));
 						}}
